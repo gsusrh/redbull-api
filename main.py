@@ -37,7 +37,9 @@ engine = create_engine(DATABASE_URI, echo=False, pool_size=10, max_overflow=20)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Crear tablas si no existen
-Base.metadata.create_all(bind=engine)
+# Nota: Las tablas se crean automáticamente. Si necesitas crear manualmente:
+# python -c "from models import Base, engine; Base.metadata.create_all(bind=engine)"
+# Base.metadata.create_all(bind=engine)
 
 # --- FastAPI App ---
 app = FastAPI(
