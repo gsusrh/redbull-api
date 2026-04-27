@@ -29,8 +29,19 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # --- Configuración ---
-DATABASE_URI = os.getenv("DATABASE_URI", "postgresql://postgres:HUOMtnXMvadivsKSrzQCmpxOqfTxaZJz@maglev.proxy.rlwy.net:30559/railway")
-DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "sk-cd23ed33b5e34e45a6ca9c2438bfe1ee")
+DATABASE_URI = os.getenv("DATABASE_URI")
+if not DATABASE_URI:
+    raise ValueError(
+        "❌ DATABASE_URI no configurada. "
+        "Agrega a tu .env:\nDATABASE_URI=postgresql://..."
+    )
+
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
+if not DEEPSEEK_API_KEY:
+    raise ValueError(
+        "❌ DEEPSEEK_API_KEY no configurada. "
+        "Agrega a tu .env:\nDEEPSEEK_API_KEY=sk-..."
+    )
 
 # --- Base de datos ---
 engine = create_engine(DATABASE_URI, echo=False, pool_size=10, max_overflow=20)

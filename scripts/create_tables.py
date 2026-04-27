@@ -14,10 +14,12 @@ from sqlalchemy import create_engine
 from models import Base
 
 # Obtener DATABASE_URI
-DATABASE_URI = os.getenv(
-    "DATABASE_URI",
-    "postgresql://postgres:HUOMtnXMvadivsKSrzQCmpxOqfTxaZJz@maglev.proxy.rlwy.net:30559/railway"
-)
+DATABASE_URI = os.getenv("DATABASE_URI")
+if not DATABASE_URI:
+    print("❌ ERROR: DATABASE_URI no configurada")
+    print("\nAgrega a tu .env:")
+    print("DATABASE_URI=postgresql://usuario:contraseña@host:puerto/base_datos")
+    exit(1)
 
 print(f"📦 Conectando a: {DATABASE_URI[:50]}...")
 
