@@ -4,6 +4,12 @@ Script para crear las tablas de la base de datos
 """
 
 import os
+import sys
+from pathlib import Path
+
+# Agregar directorio raíz al path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from sqlalchemy import create_engine
 from models import Base
 
